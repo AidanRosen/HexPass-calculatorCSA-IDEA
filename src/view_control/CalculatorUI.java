@@ -121,7 +121,7 @@ public class CalculatorUI extends JFrame {
 		getContentPane().setBackground(new Color(175, 238, 238));
 		//Sets background color
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 418, 315);
+		setBounds(100, 100, 418, 600);
 		getContentPane().setLayout(null);
 		//Empties current layout
 		calcArea.setForeground(Color.WHITE);
@@ -444,7 +444,9 @@ public class CalculatorUI extends JFrame {
 		button_exponent.setForeground(Color.BLACK);
 		button_exponent.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
 		button_exponent.setBackground(new Color(244, 17, 95));
-		button_exponent.setBounds(327, 294, 75, 40);
+		button_exponent.setBounds(327, 398, 75, 40);
+		//y - 398 is for division button
+		//y = 294 previously
 		getContentPane().add(button_exponent);
 
 
@@ -477,12 +479,122 @@ public class CalculatorUI extends JFrame {
 		button_negative.setForeground(Color.BLACK);
 		button_negative.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
 		button_negative.setBackground(new Color(57, 255, 20));
-		button_negative.setBounds(327, 346, 75, 40);
+		button_negative.setBounds(240, 294, 75, 40);
+		//y = 346 previously
 		getContentPane().add(button_negative);
 
+		JButton button_multiply = new JButton("*");
+		button_multiply.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				button_multiply.setBackground(Color.WHITE);
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				button_multiply.setBackground(new Color(236, 120, 20));
+			}
+		});
+		button_multiply.addActionListener(e -> {
+			saveValueOfArg1();
+			saveValueOfMathOp(OPERATOR.MULTIPLY);
+		});
+		button_multiply.setOpaque(true);
+		button_multiply.setForeground(Color.WHITE);
+		button_multiply.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
+		button_multiply.setBackground(new Color(236, 120, 20));
+		button_multiply.setBounds(327, 294, 75, 40);
+		//switch y value with exponents previous y value
+		getContentPane().add(button_multiply);
+
+		JButton button_divide = new JButton("/");
+		button_divide.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				button_divide.setBackground(Color.WHITE);
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				button_divide.setBackground(new Color(236, 120, 20));
+			}
+		});
+		button_divide.addActionListener(e -> {
+			saveValueOfArg1();
+			saveValueOfMathOp(OPERATOR.DIVIDE);
+		});
+		button_divide.setOpaque(true);
+		button_divide.setForeground(Color.WHITE);
+		button_divide.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
+		button_divide.setBackground(new Color(236, 120, 20));
+		button_divide.setBounds(327, 346, 75, 40);
+		getContentPane().add(button_divide);
+
+		JButton button_sqrroot = new JButton("sqrt");
+		button_sqrroot.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) { button_sqrroot.setBackground(Color.WHITE);
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				button_sqrroot.setBackground(new Color(236, 120, 20));
+			}
+		});
+		button_sqrroot.addActionListener(e -> {
+			saveValueOfArg1();
+			arg2=arg1;
+			saveValueOfMathOp(OPERATOR.SQUAREROOT);
+			calculateAnswer();
+		});
+		button_sqrroot.setOpaque(true);
+		button_sqrroot.setForeground(Color.WHITE);
+		button_sqrroot.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
+		button_sqrroot.setBackground(new Color(236, 120, 20));
+		button_sqrroot.setBounds(153, 397, 75, 40);
+		//327,450
+		getContentPane().add(button_sqrroot);
+
+		JButton button_sqrd = new JButton("^2");
+		button_sqrd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) { button_sqrd.setBackground(Color.WHITE);
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				button_sqrd.setBackground(new Color(236, 120, 20));
+			}
+		});
+		button_sqrd.addActionListener(e -> {
+			saveValueOfArg1();
+			arg2=arg1;
+			saveValueOfMathOp(OPERATOR.MULTIPLY);
+			calculateAnswer();
+		});
+		button_sqrd.setOpaque(true);
+		button_sqrd.setForeground(Color.WHITE);
+		button_sqrd.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
+		button_sqrd.setBackground(new Color(236, 120, 20));
+		button_sqrd.setBounds(240, 398, 75, 40);
+		getContentPane().add(button_sqrd);
 
 
-		
+		JButton button_dot = new JButton(".");
+		button_dot.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) { button_dot.setBackground(Color.WHITE);
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				button_dot.setBackground(new Color(236, 120, 20));
+			}
+		});
+		button_dot.addActionListener(e -> updateCalcArea(button_dot.getText()));
+		button_dot.setOpaque(true);
+		button_dot.setForeground(Color.WHITE);
+		button_dot.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
+		button_dot.setBackground(new Color(236, 120, 20));
+		button_dot.setBounds(240, 346, 75, 40);
+		getContentPane().add(button_dot);
+
+
 		JLabel lblElliesCalculator = new JLabel("Sample Calculator -- design by Ellie");
 		lblElliesCalculator.setBounds(6, 6, 134, 16);
 		getContentPane().add(lblElliesCalculator);
