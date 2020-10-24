@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import util.Mathstuff.OPERATOR;
+import util.Mathstuff.OPERATOR; //move to control
 //Because the class had to be renamed to enable exponent operations, this must also be changed
 
 public class CalculatorUI extends JFrame {
@@ -27,7 +27,7 @@ public class CalculatorUI extends JFrame {
 	// calculator values
     private OPERATOR mathOp;
 	private double arg1;
-    private double arg2;
+    public double arg2;
     private double calcAnswer;
     //Privates indicate that these can only be used in this class. Therefore, these are NOT the same
 	//as the parameters in Mathstuff
@@ -60,7 +60,7 @@ public class CalculatorUI extends JFrame {
 		initialCalcAreaInputState = true;
 	}
 	
-	private void updateCalcArea(String string) {
+	private void updateCalcArea(String string) { //this belongs in "control"
 		//The parameter "String string" allows strings to be put in here and then update that part of the
 		//GUI on the calculator
 		if (initialCalcAreaInputState) {  // sets text to string on initial key typed
@@ -132,6 +132,7 @@ public class CalculatorUI extends JFrame {
 		
 		JButton button_1 = new JButton("1");
 		//Text for the number "1". Use this as a template for other buttons to use
+
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -143,15 +144,20 @@ public class CalculatorUI extends JFrame {
 				button_1.setBackground(Color.PINK);
 			}
 		});
+		button_1.addActionListener(e -> updateCalcArea(button_1.getText()));
+
+		//Now something will happen when the button is pressed / listened to
 		button_1.setBorder(new MatteBorder(4, 4, 4, 4, Color.WHITE));
+		//Where MatteBorder's parameters of top bottom, left, and right sets
 		button_1.setOpaque(true);
+		//Turns the button to a solid color
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(Color.PINK);
-		button_1.addActionListener(e -> updateCalcArea(button_1.getText()));
-		//
 		button_1.setBounds(35, 86, 75, 40);
 		//Sets location at (35,86)
 		getContentPane().add(button_1);
+		//Actually places the label into the JFrame window
+		//Aidan's NOTE: the button is not a variable of the CalculatorUI class (or at least it doesn't seem that way)
 		
 		JButton button_2 = new JButton("2");
 		button_2.addMouseListener(new MouseAdapter() {

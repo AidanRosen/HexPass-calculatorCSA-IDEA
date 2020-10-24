@@ -34,7 +34,7 @@ public class Mathstuff {
 	        default:	
 	            calcAnswer = arg1;
 	    }
-		return calcAnswer;
+		return calcAnswer; //this goes into control BECAUSE its just a number
 	}
 
 
